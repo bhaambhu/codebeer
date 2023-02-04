@@ -2,31 +2,24 @@ from typing import List
 
 class Solution:
     def carFleet(self, target: int, position: List[int], speed: List[int]) -> int:
-        fleets = position.copy()
-        print(fleets)
-        # loop until there's only one fleet remaining
-        while len(fleets) > 1:
-          # calculate the timestep
-          timeStep = 1/max(speed)
-          print('after time ', timeStep)
-          # lets see where everyone is after one timestep
-          newFleets = list()
-          newSpeeds = list()
-          for i,x in enumerate(fleets):
-            # if any fleet reached target, remove it
-            if x >= target:
-              timeStep = 1/max(speed)
+      # [(10,8)]
+        fleets = [(position[i], speed[i]) for i in range(len(position))]
+        fleets = sorted(fleets, key=lambda x: x[0], reverse=True)
+        stack = []
+        for x in fleets:
+          # if top's end dest time is less than this element's, don't insert this
+          if stack and stack[-1]:
+            # time = distance upon speed
+            destTimeTop = (target - stack[-1][0])/stack[-1][1]
+            destTimeCurrent = (target - x[0])/x[1]
+            if destTimeCurrent <= destTimeTop:
+              continue
             else:
-              
-            fleets[i] += timeStep * speed[i]
-            # adjust speeds of equal position cars to make them fleet
-            for j,y in enumerate(fleets):
-              if x == y:
-                fleets.pop(j)
-                speed.pop(j)
-                print(fleets)
-                timeStep = 1/max(speed)
-          print(fleets)
+              stack.append(x)
+          else:
+            stack.append(x)
+
+        return stack
           
 
 s = Solution()
