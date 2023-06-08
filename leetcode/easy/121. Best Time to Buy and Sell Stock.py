@@ -18,6 +18,15 @@ class Solution:
                 localProfit = max(localProfit, x - lastNumber)
         profits.append(localProfit)
         return max(profits)
+    
+    def maxProfit2(self, prices: List[int]) -> int:
+      mp = 0
+      i = 1
+      while i < len(prices):
+        if prices[i] > prices[i-1]:
+          mp += prices[i] - prices[i-1]
+        i += 1
+      return mp
 
 
 s = Solution()
