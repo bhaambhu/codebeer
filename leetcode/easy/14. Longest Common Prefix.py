@@ -8,6 +8,7 @@ class Solution:
         res = strs[0]
         # loop through rest and trim as much as we can
         for i in strs:
+            res = res[0:min(len(i), len(res))]
             for index, letter in enumerate(i):
                 try:
                     if res[index] != letter:
@@ -19,3 +20,5 @@ class Solution:
 
 s = Solution()
 print(s.longestCommonPrefix(strs=["flower", "flow", "flight"]))
+print(s.longestCommonPrefix(strs=["flower", "flow", "f"]))
+print(s.longestCommonPrefix(strs=["ab", "a"]))
