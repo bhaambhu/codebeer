@@ -1,0 +1,80 @@
+/**
+ * @param {number} n
+ * @return {Function} counter
+ */
+// var createCounter = function (n) {
+//   return function () {};
+// };
+
+// Using JavaScript Closures
+function createCounter(n) {
+  let count = n;
+  return function () {
+    return count++;
+  };
+}
+// const counter = createCounter(10);
+// console.log(counter()); // 10
+// console.log(counter()); // 11
+// console.log(counter()); // 12
+
+// Using JavaScript Generator Functions
+function* countGenerator(number) {
+  while (true) {
+    yield String(number++);
+  }
+}
+
+// let x = countGenerator(10)
+// console.log(x.next("x").value);
+// console.log(x.next().value);
+// console.log(x.next().value);
+
+// Using Arrow function
+var createCounterArrow = (n) => {
+  return () => n++;
+};
+
+// let x = createCounterArrow(10)
+// console.log(x())
+// console.log(x())
+// console.log(x())
+
+// Using an ES6 Class
+class Counter {
+  constructor(start) {
+    this.count = start;
+  }
+  next() {
+    return this.count++;
+  }
+}
+
+let counter = new Counter(10);
+console.log(counter.next());
+console.log(counter.next());
+console.log(counter.next());
+
+/*
+Given an integer n, return a counter function. This counter function initially returns n and then returns 1 more than the previous value every subsequent time it is called (n, n + 1, n + 2, etc).
+
+ 
+
+Example 1:
+
+Input: 
+n = 10 
+["call","call","call"]
+Output: [10,11,12]
+Explanation: 
+counter() = 10 // The first time counter() is called, it returns n.
+counter() = 11 // Returns 1 more than the previous time.
+counter() = 12 // Returns 1 more than the previous time.
+Example 2:
+
+Input: 
+n = -2
+["call","call","call","call","call"]
+Output: [-2,-1,0,1,2]
+Explanation: counter() initially returns -2. Then increases after each sebsequent call.
+*/
