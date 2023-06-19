@@ -15,6 +15,7 @@ function memoizeObject(fn) {
 
 // Use the Map object
 function memoize(fn) {
+  console.log("memoized!!!", memoize)
   const cache = new Map();
   return function (...args) {
     const sArgs = JSON.stringify([...args])
@@ -24,6 +25,8 @@ function memoize(fn) {
     return cache.get(sArgs);
   };
 }
+memoize.owner = "ABC"
+
 
 let callCount = 0;
 const memoizedFn = memoize(function (a, b) {
